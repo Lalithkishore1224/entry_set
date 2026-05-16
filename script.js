@@ -121,13 +121,14 @@ function createFallingCat() {
     cat.style.left = left + '%';
     cat.style.width = size + 'px';
     cat.style.height = size + 'px';
+    cat.style.marginLeft = -(size / 2) + 'px'; // Center the cat on its 'left' position
     cat.style.animation = `fall ${duration}s linear ${delay}s forwards`;
 
     introOverlay.appendChild(cat);
 }
 
-// Generate 40 falling cats
-for (let i = 0; i < 40; i++) {
+// Generate 60 falling cats for better screen coverage
+for (let i = 0; i < 60; i++) {
     createFallingCat();
 }
 
