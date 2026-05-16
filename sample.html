@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SRC Hall of Fame 2025</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Hind:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <style>
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --y: #ffcd5b;
+      --yd: #c9980a;
+      --blk: #0b0b0b;
+      --wh: #ffffff;
+      --lt: #f5f4f0;
+      --ease: cubic-bezier(.77, 0, .18, 1);
+    }
+
+    html {
+      scroll-behavior: auto;
+      scroll-snap-type: y mandatory;
+    }
+
+    .ss-mark {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      left: 0;
+      scroll-snap-align: start;
+      pointer-events: none;
+    }
+
+    body {
+      background: var(--wh);
+      color: var(--blk);
+      font-family: 'Hind', sans-serif;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--y);
+    }
+
+    img {
+      display: block;
+    }
+
+
+
+    /* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      overflow: hidden;
+      background: linear-gradient(to top, #dadada, #ebebeb);
+      scroll-snap-align: start;
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(79, 79, 79, 0.18) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(79, 79, 79, 0.18) 1px, transparent 1px);
+      background-size: 54px 54px;
+      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 2rem;
+    }
+
+    .h-logo {
+      width: 180px;
+      max-width: 40vw;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeUp .8s .2s var(--ease) forwards;
+      filter: drop-shadow(0 15px 25px rgba(201, 152, 10, .3));
+    }
+
+    @keyframes clipIn {
+      to {
+        clip-path: inset(0 0% 0 0);
+      }
+    }
+
+    .h-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.6rem, 10vw, 9rem);
+      font-weight: 900;
+      line-height: .88;
+      letter-spacing: -.03em;
+      overflow: hidden;
+    }
+
+    .h-title .ln {
+      display: block;
+      transform: translateY(115%);
+      animation: lineUp .95s var(--ease) forwards;
+    }
+
+    .h-title .ln:nth-child(1) {
+      animation-delay: .28s;
+    }
+
+    .h-title .ln:nth-child(2) {
+      animation-delay: .44s;
+      color: var(--y);
+      -webkit-text-stroke: 1.5px var(--yd);
+    }
+
+    .h-title .ln:nth-child(3) {
+      animation-delay: .60s;
+    }
+
+    @keyframes lineUp {
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .h-year {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: rgba(0, 0, 0, .4);
+      margin-top: 1.8rem;
+      opacity: 0;
+      animation: fadeUp .7s .95s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .h-scroll-cue {
+      position: absolute;
+      bottom: 2.8rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .55rem;
+      opacity: 0;
+      animation: fadeUp .7s 1.3s ease forwards;
+    }
+
+    .h-scroll-lbl {
+      font-size: .56rem;
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, .3);
+    }
+
+    .h-scroll-bar {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--y), transparent);
+      animation: barPulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes barPulse {
+      0% {
+        transform: scaleY(0);
+        transform-origin: top;
+        opacity: 1;
+      }
+
+      50% {
+        transform: scaleY(1);
+        transform-origin: top;
+        opacity: 1;
+      }
+
+      51% {
+        transform-origin: bottom;
+      }
+
+      100% {
+        transform: scaleY(0);
+        transform-origin: bottom;
+        opacity: 0;
+      }
+    }
+
+    /* ════════════════════════════════
+   CARDS SECTION
+   ─ sticky container, height = 100vh × (N+1)
+   ─ scroll progress 0→1 maps to card 0→N-1
+   ─ cards laid out in a FLEX ROW (not stacked)
+   ─ entire row translates left as scroll advances
+   ─ active card gets scale(1.06), neighbours peek
+════════════════════════════════ */
+    #cards-section {
+      position: relative;
+      z-index: 10;
+    }
+
+    #hs-trigger {
+      position: relative;
+    }
+
+    .hs-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: linear-gradient(to top, #dadada, #ebebeb);
+      color: var(--blk);
+      transform-origin: center center;
+      will-change: transform, border-radius;
+      border-radius: 0px;
+      box-shadow: 0 -20px 80px rgba(0, 0, 0, 0.05);
+      /* Soft drop shadow for overlapping hero effect */
+    }
+
+    .hs-sticky::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(79, 79, 79, 0.18) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(79, 79, 79, 0.18) 1px, transparent 1px);
+      background-size: 54px 54px;
+      -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+      mask-image: radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Ensure topbar respects light background */
+    .hs-top {
+      flex-shrink: 0;
+      padding: 1.5rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      border-bottom: 1px solid rgba(0, 0, 0, .08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hs-top-lbl {
+      font-size: .58rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, .4);
+    }
+
+    .hs-ctr {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blk);
+    }
+
+    .hs-prog {
+      background: rgba(0, 0, 0, .1);
+    }
+
+    .hs-bottom {
+      flex-shrink: 0;
+      padding: .9rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .8rem;
+      background: transparent;
+      border-top: 1px solid rgba(0, 0, 0, .08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .hs-hint-txt {
+      color: rgba(0, 0, 0, .4);
+    }
+
+    /* topbar */
+    .hs-top {
+      flex-shrink: 0;
+      padding: 1.5rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--wh);
+      border-bottom: 1px solid rgba(0, 0, 0, .07);
+    }
+
+    .hs-top-lbl {
+      font-size: .58rem;
+      letter-spacing: .38em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, .35);
+    }
+
+    .hs-top-right {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .hs-ctr {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--blk);
+    }
+
+    .hs-ctr .cur {
+      color: var(--yd);
+    }
+
+    .hs-prog {
+      width: 80px;
+      height: 2px;
+      background: rgba(0, 0, 0, .1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hs-prog-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background: var(--y);
+      width: 0%;
+    }
+
+    /* TESTIMONIAL LAYOUT INSIDE HORIZONTAL ROW */
+    .hs-viewport {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hs-row {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      transition: transform .55s cubic-bezier(.4, .2, .2, 1);
+      will-change: transform;
+    }
+
+    /* ── INDIVIDUAL CARD (TESTIMONIAL STYLE) ── */
+    .ind-card {
+      flex-shrink: 0;
+      width: 90vw;
+      max-width: 960px;
+      margin: 0 4vw;
+      position: relative;
+      transition: transform .7s cubic-bezier(.4, 2, .3, 1), opacity .5s ease;
+      cursor: pointer;
+      opacity: 0.4;
+      transform: scale(0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ind-card.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 3;
+    }
+
+    .ind-card.neighbour {
+      opacity: 0.75;
+      transform: scale(0.92);
+      z-index: 2;
+    }
+
+    .ind-card.far {
+      opacity: 0.4;
+      transform: scale(0.85);
+      z-index: 1;
+    }
+
+    /* desktop testimonial structure */
+    .tc-avatar {
+      width: 420px;
+      height: 420px;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .tc-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+
+    .tc-card {
+      background: var(--wh);
+      border-radius: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      padding: 2.5rem;
+      margin-left: -60px;
+      z-index: 2;
+      flex: 1;
+      position: relative;
+      text-align: left;
+    }
+
+    .tc-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--blk);
+      margin-bottom: 0.4rem;
+      line-height: 1.1;
+    }
+
+    .tc-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, .5);
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .tc-desc {
+      font-size: 1.05rem;
+      color: var(--blk);
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .tc-social {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .tc-icon {
+      width: 3rem;
+      height: 3rem;
+      background: var(--blk);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wh);
+      transition: transform 0.2s, background 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .tc-icon:hover {
+      background: var(--y);
+      color: var(--blk);
+      transform: scale(1.05);
+    }
+
+    .tc-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+    }
+
+    .ind-badge {
+      display: inline-block;
+      background: var(--y);
+      color: var(--blk);
+      font-size: .52rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: .2rem .65rem;
+      border-radius: 2px;
+      margin-bottom: .65rem;
+    }
+
+    /* mobile adaptation */
+    @media(max-width:800px) {
+      .ind-card {
+        flex-direction: column;
+        width: 85vw;
+        margin: 0 5vw;
+      }
+
+      .tc-avatar {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+        aspect-ratio: 1/1;
+        margin-bottom: -30px;
+        margin-left: 0;
+      }
+
+      .tc-card {
+        margin-left: 0;
+        padding: 1.5rem;
+        text-align: center;
+      }
+
+      .tc-social {
+        justify-content: center;
+      }
+    }
+
+    /* arrow buttons */
+    .hs-arrow {
+      position: absolute;
+      top: 50%;
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--wh);
+      border: 1.5px solid rgba(0, 0, 0, .12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, .08);
+      transition: background .25s, border-color .25s;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .hs-arrow:hover {
+      background: var(--y);
+      border-color: var(--y);
+    }
+
+    .hs-arrow.left {
+      left: 3vw;
+    }
+
+    .hs-arrow.right {
+      right: 3vw;
+    }
+
+    .hs-arrow svg {
+      width: 16px;
+      height: 16px;
+      stroke: var(--blk);
+      stroke-width: 2;
+      fill: none;
+    }
+
+    /* bottom hint */
+    .hs-bottom {
+      flex-shrink: 0;
+      padding: .9rem 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .8rem;
+      background: var(--wh);
+      border-top: 1px solid rgba(0, 0, 0, .06);
+    }
+
+    .hs-hint-line {
+      width: 36px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--y), transparent);
+    }
+
+    .hs-hint-txt {
+      font-size: .55rem;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, .28);
+    }
+
+    /* ════════════════════════════════
+   SHARE MODAL
+════════════════════════════════ */
+    #share-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(255, 255, 255, .93);
+      backdrop-filter: blur(22px);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    #share-modal.open {
+      display: flex;
+    }
+
+    .m-close {
+      position: absolute;
+      top: 1.8rem;
+      right: 2rem;
+      background: none;
+      border: 1.5px solid rgba(0, 0, 0, .14);
+      color: rgba(0, 0, 0, .45);
+      font-size: .6rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: .42rem 1rem;
+      cursor: none;
+      transition: all .25s;
+    }
+
+    .m-close:hover {
+      border-color: var(--blk);
+      color: var(--blk);
+    }
+
+    /* preview card in modal */
+    .m-preview {
+      width: 280px;
+      height: 380px;
+      border-radius: 18px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, .18);
+      outline: 2.5px solid var(--y);
+      flex-shrink: 0;
+    }
+
+    .m-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+
+    .m-preview .mp-ov {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(4, 4, 4, .97) 0%, rgba(4, 4, 4, .52) 40%, transparent 70%);
+    }
+
+    .m-preview .mp-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.4rem 1.3rem;
+    }
+
+    .mp-badge {
+      background: var(--y);
+      color: var(--blk);
+      font-size: .48rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: .18rem .6rem;
+      border-radius: 2px;
+      display: inline-block;
+      margin-bottom: .55rem;
+    }
+
+    .mp-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: .1rem;
+    }
+
+    .mp-dept {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: .72rem;
+      color: rgba(255, 205, 91, .8);
+      margin-bottom: .5rem;
+    }
+
+    .mp-quote {
+      font-size: .65rem;
+      color: rgba(255, 255, 255, .48);
+      line-height: 1.6;
+    }
+
+    .mp-foot {
+      margin-top: .65rem;
+      padding-top: .65rem;
+      border-top: 1px solid rgba(255, 255, 255, .1);
+      font-size: .48rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .2);
+    }
+
+    /* modal buttons */
+    .m-actions {
+      display: flex;
+      gap: .8rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .m-btn-fill {
+      background: var(--blk);
+      color: var(--wh);
+      border: none;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: .7rem 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      transition: background .25s;
+      cursor: none;
+    }
+
+    .m-btn-fill:hover {
+      background: var(--y);
+      color: var(--blk);
+    }
+
+    .m-btn-out {
+      background: none;
+      border: 1.5px solid rgba(0, 0, 0, .18);
+      color: var(--blk);
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: .7rem 1.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      transition: all .25s;
+      cursor: none;
+    }
+
+    .m-btn-out:hover {
+      background: var(--blk);
+      color: var(--wh);
+      border-color: var(--blk);
+    }
+
+    .m-note {
+      font-size: .56rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(0, 0, 0, .27);
+      text-align: center;
+    }
+
+    @media(max-width:700px) {
+      /* removed hs-row styling */
+    }
+  </style>
+</head>
+
+<body>
+
+
+
+  <!-- ════ HERO ════ -->
+  <section id="hero">
+    <div class="hero-inner">
+      <img src="logo.png" alt="SRC MCET Innovation Nexus Logo" class="h-logo">
+      <h1 class="h-title">
+        <span class="ln">Hall</span>
+        <span class="ln">of Fame</span>
+        <span class="ln">2026</span>
+      </h1>
+      <p class="h-year">Pinnacle College &nbsp;·&nbsp; Class of 2025</p>
+    </div>
+    <div class="h-scroll-cue">
+      <span class="h-scroll-lbl">Scroll</span>
+      <div class="h-scroll-bar"></div>
+    </div>
+  </section>
+
+  <!-- ════ CARDS ════ -->
+  <section id="cards-section">
+    <div id="hs-trigger">
+      <div class="hs-sticky">
+
+        <div class="hs-top">
+          <span class="hs-top-lbl">SRC Hall of Fame &nbsp;·&nbsp; Inductees 2025</span>
+          <div class="hs-top-right">
+            <div class="hs-ctr">
+              <span class="cur" id="hs-cur">01</span>&thinsp;/&thinsp;<span id="hs-tot">08</span>
+            </div>
+            <div class="hs-prog">
+              <div class="hs-prog-fill" id="hs-fill"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hs-viewport" id="hs-viewport">
+          <button class="hs-arrow left" onclick="manualStep(-1)">
+            <svg viewBox="0 0 24 24">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+
+          <div class="hs-row" id="hs-row"></div>
+
+          <button class="hs-arrow right" onclick="manualStep(1)">
+            <svg viewBox="0 0 24 24">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="hs-bottom">
+          <div class="hs-hint-line"></div>
+          <span class="hs-hint-txt">Scroll horizontally or use arrows</span>
+          <div class="hs-hint-line"></div>
+        </div>
+
+      </div><!-- /sticky -->
+    </div><!-- /trigger -->
+  </section>
+
+  <!-- ════ SHARE MODAL ════ -->
+  <div id="share-modal">
+    <button class="m-close" onclick="closeShare()">✕ &nbsp;Close</button>
+    <div class="m-preview" id="m-preview"></div>
+    <div class="m-actions">
+      <button class="m-btn-fill" id="copy-btn" onclick="copyLink()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <rect x="9" y="9" width="13" height="13" rx="2" />
+          <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1" />
+        </svg>
+        Copy Link
+      </button>
+      <button class="m-btn-out" onclick="shareNative()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" />
+          <polyline points="16 6 12 2 8 6" />
+          <line x1="12" y1="2" x2="12" y2="15" />
+        </svg>
+        Share
+      </button>
+    </div>
+    <p class="m-note">Shared link opens the SRC Hall of Fame page</p>
+  </div>
+
+  <script>
+
+
+    /* ── DATA ── */
+    const DATA = [
+      { name: 'Arjun Mehta', dept: 'Computer Science', badge: 'Academics', quote: 'Published 3 IEEE papers. Built AI diagnostic tool deployed in 5 hospitals.', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=420&h=600&fit=crop&crop=top' },
+      { name: 'Priya Nair', dept: 'Sports Science', badge: 'Athletics', quote: 'National gold medalist, 400m. Broke the college record by 1.3 seconds.', img: 'https://images.unsplash.com/photo-1494790108755-2616b332c80e?w=420&h=600&fit=crop&crop=top' },
+      { name: 'Kavya Sharma', dept: 'Fine Arts & Design', badge: 'Arts', quote: 'National Art Exhibition. Designed the college centenary mural.', img: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=420&h=600&fit=crop&crop=top' },
+      { name: 'Rohan Das', dept: 'Business Admin.', badge: 'Leadership', quote: 'Founded ₹50L startup. Elected Student Body President twice.', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=420&h=600&fit=crop&crop=top' },
+      { name: 'Ananya Krishnan', dept: 'Social Work', badge: 'Service', quote: 'Founded EduReach — free tutoring for 2,000+ students in Tamil Nadu.', img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=420&h=600&fit=crop&crop=top' },
+      { name: 'Vikram Patel', dept: 'Mech. Engineering', badge: 'Academics', quote: 'IIT Innovation winner. Water purifier deployed in 12 rural villages.', img: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=420&h=600&fit=crop&crop=top' },
+      { name: 'Suresh Kumar', dept: 'Physical Education', badge: 'Athletics', quote: 'State cricket champion. Selected for Under-23 national squad.', img: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=420&h=600&fit=crop&crop=top' },
+      { name: 'Riya Desai', dept: 'Environmental Sci.', badge: 'Service', quote: 'Led zero-waste initiative reducing college plastic use by 80%.', img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=420&h=600&fit=crop&crop=top' },
+    ];
+
+    /* ════════════════════════════════
+       SCROLL-DRIVEN CARD CAROUSEL
+    
+       Architecture:
+       ─ Cards are in a FLEX ROW (visible side by side)
+       ─ The row has left padding = 50vw - cardHalfWidth
+         so card[0] starts centred
+       ─ On scroll, we advance activeIdx
+       ─ Row translateX moves so activeIdx card is centred
+       ─ Active card: scale(1.07) translateY(-12px) full-color
+       ─ Neighbours: scale(.94) dimmed
+       ─ Far: scale(.88) more dimmed
+    ════════════════════════════════ */
+    const fillEl = document.getElementById('hs-fill');
+    const curEl = document.getElementById('hs-cur');
+    const row = document.getElementById('hs-row');
+    const viewport = document.getElementById('hs-viewport');
+    const trigger = document.getElementById('hs-trigger');
+
+    const TOTAL = DATA.length;
+    const SCROLL_PER_STEP = 350;
+
+    document.getElementById('hs-tot').textContent = String(TOTAL).padStart(2, '0');
+
+    // Generate cards dynamically
+    row.innerHTML = DATA.map((d, i) => `
+  <div class="ind-card" data-i="${i}" onclick="jumpTo(${i})">
+    <div class="tc-avatar">
+      <img src="${d.img}" alt="${d.name}">
+    </div>
+    <div class="tc-card">
+      <div class="ind-badge">${d.badge}</div>
+      <h2 class="tc-name">${d.name}</h2>
+      <p class="tc-title">${d.dept}</p>
+      <p class="tc-desc">${d.quote}</p>
+      <div class="tc-social">
+        <button class="tc-icon" title="Share" onclick="openShare(${i}); event.stopPropagation();">
+          <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+`).join('');
+
+    const cards = Array.from(row.querySelectorAll('.ind-card'));
+
+    function cardStep() {
+      const c = cards[0];
+      const m = parseInt(getComputedStyle(c).marginLeft) + parseInt(getComputedStyle(c).marginRight);
+      return c.offsetWidth + m;
+    }
+
+    function renderAt(ai) {
+      const c = cards[0];
+      const mL = parseInt(getComputedStyle(c).marginLeft);
+      const step = cardStep();
+      const vwHalf = viewport.offsetWidth / 2;
+      const cHalf = c.offsetWidth / 2;
+
+      /* exact center offset for card ai */
+      const targetX = vwHalf - (ai * step + mL + cHalf);
+      row.style.transform = `translateX(${targetX}px)`;
+
+      cards.forEach((card, i) => {
+        card.classList.remove('active', 'neighbour', 'far');
+        const dist = Math.abs(i - ai);
+        if (dist === 0) card.classList.add('active');
+        else if (dist === 1) card.classList.add('neighbour');
+        else card.classList.add('far');
+      });
+
+      fillEl.style.width = ((ai / (TOTAL - 1)) * 100) + '%';
+      curEl.textContent = String(ai + 1).padStart(2, '0');
+    }
+
+    function jumpTo(idx) {
+      const trigTop = trigger.getBoundingClientRect().top + scrollY;
+      const targetY = trigTop + idx * SCROLL_PER_STEP + 1;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+
+    /* Set trigger height and snap markers */
+    const snapContainer = document.createElement('div');
+    snapContainer.style.position = 'absolute';
+    snapContainer.style.top = '0';
+    trigger.appendChild(snapContainer);
+
+    function setHeight() {
+      const vh = window.innerHeight;
+      /* (TOTAL - 1) covers exactly the transitions between 0 and 7 */
+      trigger.style.height = (vh + (TOTAL - 1) * SCROLL_PER_STEP) + 'px';
+
+      snapContainer.innerHTML = '';
+      for (let i = 0; i < TOTAL; i++) {
+        const pt = document.createElement('div');
+        pt.className = 'ss-mark';
+        pt.style.top = (i * SCROLL_PER_STEP) + 'px';
+        snapContainer.appendChild(pt);
+      }
+    }
+
+    let activeIdx = 0;
+    setHeight();
+    /* wait for layout before first render */
+    requestAnimationFrame(() => renderAt(0));
+    window.addEventListener('resize', () => { setHeight(); renderAt(activeIdx); }, { passive: true });
+
+    /* SCROLL → active index */
+    window.addEventListener('scroll', () => {
+      const trigTop = trigger.getBoundingClientRect().top + scrollY;
+      const into = scrollY - trigTop;
+      if (into < 0) return;
+
+      const rawIdx = into / SCROLL_PER_STEP;
+      const idx = Math.min(Math.floor(rawIdx), TOTAL - 1);
+
+      if (idx !== activeIdx) {
+        activeIdx = idx;
+        renderAt(activeIdx);
+      }
+    }, { passive: true });
+
+    /* ARROW buttons */
+    function manualStep(dir) {
+      const next = Math.min(Math.max(activeIdx + dir, 0), TOTAL - 1);
+      const trigTop = trigger.getBoundingClientRect().top + scrollY;
+      const targetY = trigTop + next * SCROLL_PER_STEP + 1;
+      window.scrollTo({ top: targetY, behavior: 'smooth' });
+    }
+
+    /* ── SHARE MODAL ── */
+    let shareIdx = 0;
+    function openShare(idx) {
+      shareIdx = idx;
+      const d = DATA[idx];
+      document.getElementById('m-preview').innerHTML = `
+    <img src="${d.img}" style="width:100%;height:100%;object-fit:cover;object-position:top;">
+    <div class="mp-ov"></div>
+    <div class="mp-body">
+      <span class="mp-badge">${d.badge}</span>
+      <div class="mp-name">${d.name}</div>
+      <div class="mp-dept">${d.dept}</div>
+      <div class="mp-quote">${d.quote}</div>
+      <div class="mp-foot">SRC Hall of Fame · Pinnacle College 2025</div>
+    </div>`;
+      document.getElementById('share-modal').classList.add('open');
+    }
+    function closeShare() { document.getElementById('share-modal').classList.remove('open'); }
+    function copyLink() {
+      const url = location.href.split('?')[0] + '?card=' + shareIdx;
+      navigator.clipboard.writeText(url).then(() => {
+        const b = document.getElementById('copy-btn');
+        const o = b.innerHTML;
+        b.textContent = '✓ Copied!';
+        setTimeout(() => b.innerHTML = o, 2200);
+      });
+    }
+    function shareNative() {
+      const d = DATA[shareIdx];
+      const url = location.href.split('?')[0] + '?card=' + shareIdx;
+      if (navigator.share) navigator.share({ title: `${d.name} — SRC Hall of Fame 2025`, text: `🏆 ${d.name} has been inducted into the SRC Hall of Fame! ${d.quote}`, url });
+      else copyLink();
+    }
+
+    /* handle ?card= param on load */
+    (function () {
+      const ci = parseInt(new URLSearchParams(location.search).get('card'), 10);
+      if (!isNaN(ci) && ci >= 0 && ci < TOTAL) {
+        setTimeout(() => {
+          const trigTop = trigger.getBoundingClientRect().top + scrollY;
+          window.scrollTo({ top: trigTop + ci * SCROLL_PER_STEP, behavior: 'smooth' });
+          setTimeout(() => openShare(ci), 700);
+        }, 400);
+      }
+    })();
+
+    /* ── 2D STACK SCROLL ANIMATION (Hero to Cards) ── */
+    const heroSec = document.getElementById('hero');
+    const stickySec = document.querySelector('.hs-sticky');
+    function updateStackAnim() {
+      if (!heroSec || !stickySec || !trigger) return;
+      const wh = window.innerHeight;
+      const trigTop = trigger.getBoundingClientRect().top;
+
+      let prog = (wh - trigTop) / wh;
+
+      if (prog <= 0) {
+        heroSec.style.transform = `scale(1) rotateZ(0deg)`;
+        heroSec.style.opacity = 1;
+        stickySec.style.transform = `scale(0.8) rotateZ(5deg)`;
+        stickySec.style.borderRadius = `30px`;
+      } else if (prog >= 1) {
+        heroSec.style.transform = `scale(0.8) rotateZ(-5deg)`;
+        heroSec.style.opacity = 0.5;
+        stickySec.style.transform = `none`;
+        stickySec.style.borderRadius = `0px`;
+      } else {
+        const heroScale = 1 - (0.2 * prog);
+        const heroRot = 0 - (5 * prog);
+        heroSec.style.transform = `scale(${heroScale}) rotateZ(${heroRot}deg)`;
+        heroSec.style.opacity = 1 - (0.5 * prog);
+
+        const cardsScale = 0.8 + (0.2 * prog);
+        const cardsRot = 5 - (5 * prog);
+        stickySec.style.transform = `scale(${cardsScale}) rotateZ(${cardsRot}deg)`;
+        stickySec.style.borderRadius = `${30 - (30 * prog)}px`;
+      }
+    }
+    window.addEventListener('scroll', updateStackAnim, { passive: true });
+    window.addEventListener('resize', updateStackAnim, { passive: true });
+    updateStackAnim();
+  </script>
+</body>
+
+</html>
